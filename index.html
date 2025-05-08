@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+        <form onsubmit="return register()">
+            <label>Name</label>
+            <br/>
+            <input type="text" id="name" placeholder="Enter your name"/>
+            <br/>
+            <br/>
+            <label>Address</label>
+            <br/>
+            <input type="text" id="address"  placeholder="Enter your address"/>
+            <br/>
+            <br/>
+            <label>Contact</label>
+            <br/>
+            <input type="text" id="contact" placeholder="Enter your contact no"/>
+            <br/>
+            <br/>
+            <label>Email</label>
+            <br/>
+            <input type="email" id="email" placeholder="Enter your email"/>
+            <br/>
+            <br/>
+            <label>Password</label>
+            <br/>
+            <input type="password" id="pass" placeholder="Enter your Password"/>
+            <br/>
+            <br/>
+            <button type="Submit">Register</button>
+            <br/>
+            <br/>
+        </form>
+        <script >
+            function register(){
+                let name=document.getElementById("name").value;
+                let address=document.getElementById("address").value;
+                let contact=document.getElementById("contact").value;
+                let email=document.getElementById("email").value;
+                let users=JSON.parse(localStorage.getItem("user"))||[];
+            
+                if(users.some((user)=>user.email===email)){
+                    alert("duplicated data found");
+                }else{
+                    users.push({"name":name,"address":address,"contact":contact,"email":email});
+                    localStorage.setItem("user",JSON.stringify(users));
+                    alert("data is saved successfully")
+                }
+                return false;
+            }
+        </script>
+</body>
+</html>
